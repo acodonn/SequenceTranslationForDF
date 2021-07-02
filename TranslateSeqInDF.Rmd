@@ -1,0 +1,56 @@
+---
+title: "Git_TranslateSeqForDF"
+author: "Angela O'Donnell"
+date: "7/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+#Make a test dataframe with two sequences
+```{r}
+ntd <- c("agctgctagt", "aagtcgc")
+```
+
+```{r}
+df <- as.data.frame(ntd)
+```
+
+
+#PACKAGES
+```{r}
+#install.packages("seqinr")
+```
+
+#LOAD
+```{r}
+library(seqinr)
+library(dplyr)
+```
+
+
+
+
+#Translates and then concatenates the vector of characters into a string
+```{r}
+c2s(translate(s2c(df$ntd[1])))
+```
+
+#Make a funcation for that ^
+```{r}
+translateFun <- function(nuc) {
+  translatedSeq <- c2s(translate(s2c(nuc)))
+  return(translatedSeq)
+}
+```
+
+#Make a new dataframe with a new column ("Translated") that has the translated sequences
+```{r}
+newDF<- df %>%
+  mutate (Translated = apply(df, 1, translateFun))
+```
+
