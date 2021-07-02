@@ -51,6 +51,7 @@ translateFun <- function(nuc) {
 #Make a new dataframe with a new column ("Translated") that has the translated sequences
 ```{r}
 newDF<- df %>%
+  select(ntd) #Use this when the number of columns > 1
   mutate (Translated = apply(df, 1, translateFun))
 ```
 
